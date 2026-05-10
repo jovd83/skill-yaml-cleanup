@@ -1,0 +1,42 @@
+{
+  "skill_name": "skill-yaml-cleanup",
+  "version": "2.0.0",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Audit my skills directory and show me which ones have oversized frontmatter.",
+      "expected_behavior": "Runs scripts/audit.py, produces a severity-grouped table of oversized skills with character counts.",
+      "tags": ["audit", "phase-1"]
+    },
+    {
+      "id": 2,
+      "prompt": "The release-manager-skill frontmatter is too long. Analyze it and tell me what to fix.",
+      "expected_behavior": "Runs scripts/analyze.py, lists applicable optimizations with estimated savings.",
+      "tags": ["analyze", "phase-2"]
+    },
+    {
+      "id": 3,
+      "prompt": "Clean up skill metadata for all skills over the limit.",
+      "expected_behavior": "Audits, analyzes, proposes changes, and waits for user approval before applying.",
+      "tags": ["full-pipeline", "approval-gate"]
+    },
+    {
+      "id": 4,
+      "prompt": "My skills are failing to preload. Can you check the frontmatter sizes?",
+      "expected_behavior": "Recognizes preloading failure as a trigger, runs audit, reports results.",
+      "tags": ["trigger-recognition", "audit"]
+    },
+    {
+      "id": 5,
+      "prompt": "Reduce YAML bloat in the backlog-story-generator skill.",
+      "expected_behavior": "Runs analyze on the specific skill, proposes optimizations, asks for approval.",
+      "tags": ["single-skill", "analyze"]
+    },
+    {
+      "id": 6,
+      "prompt": "Flatten all vertical YAML lists in my skill registry.",
+      "expected_behavior": "Identifies skills with vertical lists, proposes flattening, applies after approval.",
+      "tags": ["flatten", "specific-optimization"]
+    }
+  ]
+}
