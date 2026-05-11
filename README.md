@@ -2,11 +2,12 @@
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](#requirements)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Validate Skills](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/validate.yml/badge.svg)](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/validate.yml)
+[![AgentSkills Standard](https://img.shields.io/badge/AgentSkills-Standard-green.svg)](https://agentskills.io)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jovd83)
 
-**Audit and optimize YAML frontmatter in AgentSkill `SKILL.md` files.**
+**Audit and optimize YAML frontmatter in AgentSkill `SKILL.md` files for the [Skill Dispatcher](https://github.com/jovd83/skill-dispatcher) ecosystem.**
 
 Many agent platforms impose a hard character limit on YAML frontmatter (typically **1,000 characters**). Exceeding this limit causes preloading failures and context bloat. This skill finds oversized frontmatter, proposes targeted optimizations, and — with explicit user approval — applies them.
 
@@ -67,8 +68,9 @@ Copy or symlink the `SKILL.md` and `scripts/` directory into your agent's skill 
 cp -r . ~/.agents/skills/skill-yaml-cleanup/
 ```
 
-### Requirements
+### Prerequisites
 
+- [Skill Dispatcher](https://github.com/jovd83/skill-dispatcher) (required for registry integration and telemetry)
 - Python 3.10+
 - No external dependencies (stdlib only)
 
