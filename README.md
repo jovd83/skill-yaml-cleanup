@@ -1,7 +1,10 @@
 # skill-yaml-cleanup
 
-![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](#requirements)
+[![Validate Skills](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/ci.yml/badge.svg)](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/ci.yml)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jovd83)
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/jovd83/skill-yaml-cleanup)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jovd83/skill-yaml-cleanup)
 

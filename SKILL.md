@@ -24,6 +24,8 @@ metadata:
 
 > **Author:** jovd83 | **Version:** 2.0.0 | **License:** MIT
 
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
+
 Audit and optimize YAML frontmatter in `SKILL.md` files. Agent platforms enforce a **1,000-character limit** on frontmatter blocks. Exceeding this causes preloading failures and context overflow. This skill finds, analyzes, and — with your approval — fixes oversized blocks.
 
 ## When to Trigger
