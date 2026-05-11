@@ -3,10 +3,8 @@
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](#requirements)
-[![Validate Skills](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/ci.yml/badge.svg)](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/ci.yml)
+[![Validate Skills](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/validate.yml/badge.svg)](https://github.com/jovd83/skill-yaml-cleanup/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jovd83)
-![GitHub Repo Size](https://img.shields.io/github/repo-size/jovd83/skill-yaml-cleanup)
-![GitHub last commit](https://img.shields.io/github/last-commit/jovd83/skill-yaml-cleanup)
 
 **Audit and optimize YAML frontmatter in AgentSkill `SKILL.md` files.**
 
@@ -27,13 +25,13 @@ python scripts/cleanup.py --dir ~/.agents/skills --analyze --apply --backup
 
 ## What It Does
 
-| Optimization       | Description                                            | Typical Saving |
-|:-------------------|:-------------------------------------------------------|:--------------:|
-| **Deduplication**  | Merge duplicate `metadata:` blocks                     | 200–500 chars  |
-| **Flattening**     | Convert vertical YAML lists to inline values           | 20–80 chars    |
-| **Noise removal**  | Strip `tags:`, `metadata-tags:`, empty fields, external configs | 50–200 chars |
-| **Field migration**| Move `license`, `author`, `version`, etc. to the body  | 50–270 chars   |
-| **Description trim**| Shorten descriptions over 300 chars (last resort)     | 50–180 chars   |
+| Optimization         | Description                                                     | Typical Saving |
+| :------------------- | :-------------------------------------------------------------- | :------------: |
+| **Deduplication**    | Merge duplicate `metadata:` blocks                              | 200–500 chars  |
+| **Flattening**       | Convert vertical YAML lists to inline values                    |  20–80 chars   |
+| **Noise removal**    | Strip `tags:`, `metadata-tags:`, empty fields, external configs |  50–200 chars  |
+| **Field migration**  | Move `license`, `author`, `version`, etc. to the body           |  50–270 chars  |
+| **Description trim** | Shorten descriptions over 300 chars (last resort)               |  50–180 chars  |
 
 ## Repository Structure
 
@@ -94,6 +92,16 @@ pip install pytest
 pytest tests/ -v
 ```
 
+## Validation
+
+Run the consolidated repository validator after substantive edits:
+
+```powershell
+python .\scripts\validate_repo.py
+# or
+powershell -File .\scripts\validate_repo.ps1
+```
+
 ## Contributing
 
 1. Fork the repository
@@ -116,12 +124,12 @@ jovd83
 
 Three new composable helpers added to `scripts/_common.py` for use by `skill-dispatcher/scripts/build_registry.py` and any other consumer:
 
-| Helper | Purpose |
-|:-------|:--------|
-| `dedupe_metadata_blocks(fm)` | Merge duplicate `metadata:` blocks in frontmatter |
-| `flatten_vertical_lists(fm, list_fields)` | Convert vertical `- item` YAML lists to inline CSV |
-| `strip_noise(fm)` | Remove decorative/noise fields (`tags`, `metadata-tags`, empty fields) |
-| `normalize(fm)` | Pipeline combining all three; returns `(new_fm, report_dict)` |
+| Helper                                    | Purpose                                                                |
+| :---------------------------------------- | :--------------------------------------------------------------------- |
+| `dedupe_metadata_blocks(fm)`              | Merge duplicate `metadata:` blocks in frontmatter                      |
+| `flatten_vertical_lists(fm, list_fields)` | Convert vertical `- item` YAML lists to inline CSV                     |
+| `strip_noise(fm)`                         | Remove decorative/noise fields (`tags`, `metadata-tags`, empty fields) |
+| `normalize(fm)`                           | Pipeline combining all three; returns `(new_fm, report_dict)`          |
 
 New constant `DISPATCHER_LIST_FIELDS` — canonical set of dispatcher metadata keys that expect inline CSV values. Imported by `build_registry.py` to avoid duplication.
 
