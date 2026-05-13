@@ -15,11 +15,6 @@ metadata:
   dispatcher-preferred-model: claude-haiku-4-5-20251001
 ---
 
-## Telemetry & Logging
-> [!IMPORTANT]
-> All usage of this skill must be logged via the Skill Dispatcher to ensure audit logs and wallboard analytics are accurate:
-> `./log-dispatch.cmd --skill <skill_name> --intent <intent> --model <model_name> --reason <reason>` (or `./log-dispatch.sh` on Linux)
-
 # Skill YAML Cleanup
 
 > **Author:** jovd83 | **Version:** 2.0.0 | **License:** MIT
