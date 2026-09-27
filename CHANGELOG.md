@@ -14,7 +14,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `scripts/skill_lint.py`: checks frontmatter YAML, name format, name against folder, description length, field values, development-tree paths, model-run telemetry instructions, unknown keys, author/version in metadata, SKILL.md size, relative links, and optionally the README via skill-readme-standard's `check_readme.py`. Text or JSON output; exit codes 0/1/2; per-skill `.skill-lint.json`. A telemetry mention that is negated on its line ("do not run …") is not flagged.
 - `lint_skill()` as a library function, used by the manifest-driven skill sync as its lint gate.
 - `action.yml`: a composite GitHub Action (`uses: jovd83/skill-lint@v3`) that runs the linter, installing PyYAML into a private venv only when the runner lacks it.
-- `tests/test_skill_lint.py`: 19 tests, every sample skill built in a temporary folder.
+- `tests/test_skill_lint.py`: 20 tests, every sample skill built in a temporary folder.
 - `validate_repo.py` and `validate_repo.ps1` now lint the repository itself.
 
 ## [2.0.0] — 2026-04-29

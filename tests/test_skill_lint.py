@@ -209,6 +209,14 @@ def test_cli_exit_codes(tmp_path):
     assert run_cli(clean, clean, "--expect-name", "x").returncode == 2
 
 
+def test_cli_dot_uses_the_current_folder_name(tmp_path):
+    skill = make_skill(tmp_path)
+    result = subprocess.run([sys.executable, os.path.abspath(SCRIPT), ".", "--json"], cwd=skill,
+                            capture_output=True, text=True, encoding="utf-8")
+    assert result.returncode == 0, result.stdout
+    assert json.loads(result.stdout)["findings"] == []
+
+
 def test_readme_checker_failures_become_findings(tmp_path):
     (tmp_path / ".git").mkdir()
     skill = make_skill(tmp_path)

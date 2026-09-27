@@ -218,7 +218,7 @@ def lint_skill(skill_md: Path, expect_name: str | None = None, skip=(), display_
     """Lint one SKILL.md and the folder around it. Returns every finding; nothing is written."""
     if yaml is None:
         raise RuntimeError("PyYAML is required: pip install pyyaml")
-    skill_md = Path(skill_md)
+    skill_md = Path(os.path.abspath(skill_md))  # "." has no folder name; abspath keeps junction paths as given
     skill_dir = skill_md.parent
     cfg = load_config(skill_dir)
     skip = set(skip) | set(cfg.get("skip", []))
@@ -408,7 +408,7 @@ def main(argv=None) -> int:
 
     skills: list[tuple[Path, Path]] = []
     for raw in args.paths:
-        p = Path(raw).expanduser()
+        p = Path(os.path.abspath(Path(raw).expanduser()))
         if not p.exists():
             print(f"skill-lint: {raw} does not exist", file=sys.stderr)
             return 2
