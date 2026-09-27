@@ -102,7 +102,7 @@ When frontmatter is too long for a platform's budget, use the trim tools. Every 
 The repository is also a GitHub Action:
 
 ```yaml
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: jovd83/skill-lint@v3
   with:
     path: .

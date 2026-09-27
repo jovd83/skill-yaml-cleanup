@@ -24,7 +24,7 @@ runs:
   steps:
     - name: Fetch skill-readme-standard
       if: inputs.readme == 'true'
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: jovd83/skill-readme-standard
         path: .skill-lint-readme-standard
@@ -45,7 +45,7 @@ runs:
           "$py" -m venv "$venv"
           py="$venv/bin/python"
           [ -x "$py" ] || py="$venv/Scripts/python.exe"
-          "$py" -m pip install --quiet pyyaml
+          "$py" -m pip install --quiet "pyyaml>=6.0.1,<7"
         fi
         opts=()
         if [ "$LINT_README" = "true" ]; then

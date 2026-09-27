@@ -16,6 +16,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `action.yml`: a composite GitHub Action (`uses: jovd83/skill-lint@v3`) that runs the linter, installing PyYAML into a private venv only when the runner lacks it.
 - `tests/test_skill_lint.py`: 20 tests, every sample skill built in a temporary folder.
 - `validate_repo.py` and `validate_repo.ps1` now lint the repository itself.
+- CI and the action use `actions/checkout@v7` and `actions/setup-python@v7` (Node 24; the v4/v5 majors declare Node 20, which GitHub-hosted runners dropped on 2026-09-23), and install `pyyaml>=6.0.1,<7`.
 
 ## [2.0.0] — 2026-04-29
 
