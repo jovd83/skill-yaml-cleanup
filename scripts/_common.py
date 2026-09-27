@@ -24,8 +24,9 @@ DISPATCHER_FIELDS = {"name", "description", "metadata"}
 # Non-dispatcher top-level fields safe to migrate to the body.
 MIGRATABLE_TOP_LEVEL = {"license", "compatibility", "homepage", "platforms"}
 
-# Non-dispatcher metadata-level fields safe to migrate to the body.
-MIGRATABLE_META = {"author", "version", "maturity"}
+# Metadata-level fields safe to migrate to the body. author and version stay in
+# metadata: the library rule is that SKILL.md metadata carries them.
+MIGRATABLE_META = {"maturity"}
 
 # Fields that are noise (decorative, unused, or external-tool config).
 NOISE_META_FIELDS = {"tags", "metadata-tags", "dispatcher-persistent-directories"}

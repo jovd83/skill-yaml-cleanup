@@ -1,42 +1,42 @@
 {
-  "skill_name": "skill-yaml-cleanup",
-  "version": "2.0.0",
+  "skill_name": "skill-lint",
+  "version": "3.0.0",
   "evals": [
     {
       "id": 1,
-      "prompt": "Audit my skills directory and show me which ones have oversized frontmatter.",
-      "expected_behavior": "Runs scripts/audit.py, produces a severity-grouped table of oversized skills with character counts.",
-      "tags": ["audit", "phase-1"]
+      "prompt": "/skill-lint ~/.agents/skills",
+      "expected_behavior": "Runs scripts/skill_lint.py on the tree, leads with the totals, lists errors grouped by skill with file:line and check id, summarises warnings by check, marks third-party skills as report-only, and changes no files.",
+      "tags": ["lint", "tree", "read-only"]
     },
     {
       "id": 2,
-      "prompt": "The release-manager-skill frontmatter is too long. Analyze it and tell me what to fix.",
-      "expected_behavior": "Runs scripts/analyze.py, lists applicable optimizations with estimated savings.",
-      "tags": ["analyze", "phase-2"]
+      "prompt": "/skill-lint . --readme",
+      "expected_behavior": "Runs skill_lint.py with --readme, locating check_readme.py next to the installed skill or via --readme-checker; reports README failures as `readme` findings; if the checker cannot be found, says so instead of skipping silently.",
+      "tags": ["lint", "readme"]
     },
     {
       "id": 3,
-      "prompt": "Clean up skill metadata for all skills over the limit.",
-      "expected_behavior": "Audits, analyzes, proposes changes, and waits for user approval before applying.",
-      "tags": ["full-pipeline", "approval-gate"]
+      "prompt": "/skill-lint my-skill -- and fix whatever it finds",
+      "expected_behavior": "Lints first, proposes a fix per error (for example quoting a description that contains ': '), waits for approval before editing, then re-runs the linter on the changed skill and reports the new totals.",
+      "tags": ["fix", "approval-gate"]
     },
     {
       "id": 4,
-      "prompt": "My skills are failing to preload. Can you check the frontmatter sizes?",
-      "expected_behavior": "Recognizes preloading failure as a trigger, runs audit, reports results.",
-      "tags": ["trigger-recognition", "audit"]
+      "prompt": "/skill-lint reports name-folder for bug-fix-lifecycle. Just rename it.",
+      "expected_behavior": "Explains that the name is also the public trigger and repository name, asks whether the `name` field or the folder should change, and does not rename anything or add a skip without that answer.",
+      "tags": ["name-folder", "approval-gate"]
     },
     {
       "id": 5,
-      "prompt": "Reduce YAML bloat in the backlog-story-generator skill.",
-      "expected_behavior": "Runs analyze on the specific skill, proposes optimizations, asks for approval.",
-      "tags": ["single-skill", "analyze"]
+      "prompt": "The release-manager-skill frontmatter is too long for the platform. Trim it.",
+      "expected_behavior": "Uses audit.py and analyze.py, shows a before/after proposal, stops for approval, applies deduplicate/flatten/remove_noise/migrate_to_body with --backup on the first write, keeps author and version in metadata, and verifies with audit.py and skill_lint.py.",
+      "tags": ["trim", "approval-gate"]
     },
     {
       "id": 6,
-      "prompt": "Flatten all vertical YAML lists in my skill registry.",
-      "expected_behavior": "Identifies skills with vertical lists, proposes flattening, applies after approval.",
-      "tags": ["flatten", "specific-optimization"]
+      "prompt": "Add skill-lint to the CI of my playwright-skill repository.",
+      "expected_behavior": "Adds a job that checks out the repository and uses jovd83/skill-lint@v3 with path '.', explains the readme/strict/args inputs, and notes that name-folder compares the skill name with the repository name in Actions.",
+      "tags": ["ci", "github-action"]
     }
   ]
 }

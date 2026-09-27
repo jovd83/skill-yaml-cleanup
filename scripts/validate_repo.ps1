@@ -17,5 +17,12 @@ if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne 1) {
     exit $LASTEXITCODE
 }
 
+Write-Host "--- Running skill-lint on this repository ---" -ForegroundColor Yellow
+python scripts/skill_lint.py . --expect-name skill-lint --strict
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "skill-lint found problems in this repository." -ForegroundColor Red
+    exit $LASTEXITCODE
+}
+
 Write-Host "`nValidation complete!" -ForegroundColor Green
 exit 0

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Consolidated validation for the skill-yaml-cleanup repository."""
+"""Consolidated validation for the skill-lint repository."""
 
 import subprocess
 import sys
@@ -34,6 +34,13 @@ def main() -> int:
          print("Audit script failed to execute.")
          return rc
     
+    # 3. Lint this repository with its own linter (it must pass strict)
+    print("--- Running skill-lint on this repository ---")
+    rc = run_command([sys.executable, "scripts/skill_lint.py", ".", "--expect-name", "skill-lint", "--strict"], root)
+    if rc != 0:
+        print("skill-lint found problems in this repository.")
+        return rc
+
     print("\nValidation complete!")
     return 0
 

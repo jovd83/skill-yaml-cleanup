@@ -2,7 +2,8 @@
 migrate_to_body.py — Move non-dispatcher fields from frontmatter to the
 markdown body.
 
-Fields moved: license, compatibility, author, version, maturity, homepage, platforms.
+Fields moved: license, compatibility, homepage, platforms, and metadata.maturity.
+author and version stay in metadata.
 These are not read by the dispatcher preloader. The agent reads the full
 SKILL.md, so nothing is lost.
 
