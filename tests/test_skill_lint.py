@@ -147,6 +147,11 @@ def test_telemetry_in_skill_md_and_references_only(tmp_path):
     assert [(f.check, f.line) for f in findings] == [("telemetry", 13)]
 
 
+def test_negated_telemetry_mention_is_not_an_instruction(tmp_path):
+    body = "# Demo\n\nDo not run `log-dispatch` for normal skill use; hooks log usage.\n"
+    assert skill_lint.lint_skill(make_skill(tmp_path, body=body) / "SKILL.md") == []
+
+
 def test_links_resolve_and_code_fences_are_ignored(tmp_path):
     body = ("# Demo\n\nSee [guide](references/guide.md), [gone](references/gone.md#part) and "
             "[site](https://example.com).\n\n```markdown\n[example](not/checked.md)\n```\n")

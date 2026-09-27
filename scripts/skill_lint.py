@@ -85,6 +85,8 @@ TELEMETRY_PATTERNS = [
     re.compile(r"\bdispatch_logger\b"),
 ]
 TELEMETRY_DIRS = ("references",)
+# "Do not run log-dispatch ..." repeats the rule instead of breaking it.
+NEGATION_RE = re.compile(r"\b(?:do not|don't|never|no longer|must not|should not)\b", re.I)
 
 TEXT_SUFFIXES = {".md", ".txt", ".py", ".js", ".mjs", ".cjs", ".ts", ".ps1", ".psm1", ".sh", ".bat", ".cmd",
                  ".json", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".html", ".css", ".xml", ".csv"}
@@ -179,7 +181,7 @@ def text_files(folder: Path):
                 yield p
 
 
-def scan(path: Path, patterns) -> list[tuple[int, str]]:
+def scan(path: Path, patterns, skip_negated: bool = False) -> list[tuple[int, str]]:
     try:
         text = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
@@ -187,6 +189,9 @@ def scan(path: Path, patterns) -> list[tuple[int, str]]:
     hits = []
     for pattern in patterns:
         for m in pattern.finditer(text):
+            line_start = text.rfind("\n", 0, m.start()) + 1
+            if skip_negated and NEGATION_RE.search(text[line_start:m.start()]):
+                continue
             hits.append((line_of(text, m.start()), m.group(0)))
     return sorted(set(hits))
 
@@ -333,7 +338,7 @@ def lint_skill(skill_md: Path, expect_name: str | None = None, skip=(), display_
     tele_files = [skill_md] + [p for d in TELEMETRY_DIRS if (skill_dir / d).is_dir()
                                for p in text_files(skill_dir / d)]
     for p in tele_files:
-        for line, hit in scan(p, TELEMETRY_PATTERNS):
+        for line, hit in scan(p, TELEMETRY_PATTERNS, skip_negated=True):
             add("telemetry", "error", f"model-run telemetry instruction `{hit}`; usage is logged by harness hooks",
                 line, p)
 
