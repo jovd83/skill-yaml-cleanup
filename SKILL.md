@@ -165,11 +165,3 @@ The agent reads the **entire SKILL.md** — moving fields to the body loses noth
 | `scripts/flatten.py` | Convert vertical lists to inline values | `--file`, `--dry-run`, `--backup` |
 | `scripts/remove_noise.py` | Strip noise/decorative fields | `--file`, `--dry-run`, `--backup` |
 | `scripts/migrate_to_body.py` | Move non-dispatcher fields to body | `--file`, `--dry-run`, `--backup` |
-
-## Optional Integration: Telemetry
-
-If your environment uses a skill dispatcher with telemetry logging, log usage after each invocation:
-```
-./log-dispatch.cmd --skill skill-yaml-cleanup --intent <intent> --model <model> --reason <reason>
-```
-This is optional and depends on your infrastructure setup.
